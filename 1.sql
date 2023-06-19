@@ -1,6 +1,6 @@
 USE [master]
 GO
-CREATE DATABASE [VeloBD]
+CREATE DATABASE [VeloBD] ON PRIMARY
   ( 
   NAME = 'VeloBD', 
   FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL14.SQLEXPRESS\MSSQL\DATA\VeloBD.mdf' , 
@@ -44,10 +44,13 @@ insert into Adresse (Ville) values
 ('Lyon'),
 ('Paris'),
 ('Marseille')
-insert into Personne (Nom, Prenom) values
+GO
+insert into Personne (Nom, Prenom, Adresse) values
   ('Zola', 'Emile', 1),
   ('Hugo', 'Victor', 2),
   ('Dupont', 'Pierre', 3),
   ('Robespierre', 'Maximilien', 1),
-  ('Valjean', 'Jean')
+  ('Valjean', 'Jean', NULL)
 
+select * from Personne
+select * from Adresse
