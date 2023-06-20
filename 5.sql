@@ -10,3 +10,6 @@ insert Categorie (Libelle) values
 	('Ecriture'),
 	('Papeterie')
 select * from Categorie
+
+ALTER TABLE PRODUIT ADD Categorie int NULL
+select * from Produit
