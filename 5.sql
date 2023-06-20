@@ -12,4 +12,10 @@ insert Categorie (Libelle) values
 select * from Categorie
 
 ALTER TABLE PRODUIT ADD Categorie int NULL
+
+select * from Produit
+update Produit set Categorie=1 where id=1
+update Produit set Categorie=1 where id=2
+update Produit set Categorie=2 where id=3
+
 select * from Produit
