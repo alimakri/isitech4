@@ -8,7 +8,8 @@ CREATE TABLE [dbo].[Categorie]
 GO
 insert Categorie (Libelle) values 
 	('Ecriture'),
-	('Papeterie')
+	('Papeterie'),
+	('Informatique')
 select * from Categorie
 
 ALTER TABLE PRODUIT ADD Categorie int NULL
@@ -19,5 +20,33 @@ update Produit set Categorie=1 where id=2
 update Produit set Categorie=2 where id=3
 
 select * from Produit
+select * from Categorie
 
-select p.Libelle produit, c.Libelle cat from Produit p inner join Categorie c on p.categorie=c.Id
+select 
+	Produit.Libelle produit, Categorie.Libelle cat 
+from Produit 
+	 inner join Categorie on Produit.categorie=Categorie.Id
+
+select 
+	Produit.Libelle produit, Categorie.Libelle cat 
+from  Categorie 
+	 inner join Produit  on Produit.categorie=Categorie.Id
+
+select 
+	* 
+from Categorie 
+	left join Produit on Produit.Categorie = Categorie.Id 
+
+select 
+	* 
+from Categorie 
+	full join Produit on Produit.Categorie = Categorie.Id 
+
+select 
+	* 
+from Categorie 
+	cross join Produit 
+select * from Produit
+
+
+update Produit set Categorie=7 where id=1
