@@ -19,3 +19,5 @@ update Produit set Categorie=1 where id=2
 update Produit set Categorie=2 where id=3
 
 select * from Produit
+
+select p.Libelle produit, c.Libelle cat from Produit p inner join Categorie c on p.categorie=c.Id
