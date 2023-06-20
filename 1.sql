@@ -54,3 +54,4 @@ insert into Personne (Nom, Prenom, Adresse) values
 
 select * from Personne
 select * from Adresse
+
