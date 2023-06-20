@@ -10,6 +10,9 @@
 
 USE [master]
 GO
+ALTER DATABASE [VenteBD] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
+DROP DATABASE [VenteBD]
+GO
 CREATE DATABASE [VenteBD] ON PRIMARY
   ( 
   NAME = 'VenteBD', 
@@ -45,35 +48,40 @@ CREATE TABLE dbo.Commande
 	CONSTRAINT [PK_Commande] PRIMARY KEY CLUSTERED ([Id] ASC)
 )
 GO
-USE [VenteBD]
-GO
-
-/****** Object:  Table [dbo].[LigneCommande]    Script Date: 19/06/2023 17:25:33 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[LigneCommande](
+CREATE TABLE [dbo].[LigneCommande]
+(
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Commande] [int] NOT NULL,
 	[Produit] [int] NOT NULL,
 	[Quantite] [int] NOT NULL,
 	[PrixUnitaire] [decimal](18, 2) NOT NULL,
- CONSTRAINT [PK_LigneCommande] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+	CONSTRAINT [PK_LigneCommande] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
 GO
 
-ALTER TABLE [dbo].[LigneCommande]  WITH CHECK ADD  CONSTRAINT [FK_LigneCommande_Commande] FOREIGN KEY([Commande]) REFERENCES [dbo].[Commande] ([Id])
-ALTER TABLE [dbo].[LigneCommande] CHECK CONSTRAINT [FK_LigneCommande_Commande]
+ALTER TABLE [dbo].[LigneCommande] WITH CHECK ADD  CONSTRAINT [FK_LigneCommande_Commande] FOREIGN KEY([Commande]) REFERENCES [dbo].[Commande] ([Id])
+--ALTER TABLE [dbo].[LigneCommande] CHECK CONSTRAINT [FK_LigneCommande_Commande]
 GO
 
 ALTER TABLE [dbo].[LigneCommande]  WITH CHECK ADD  CONSTRAINT [FK_LigneCommande_Produit] FOREIGN KEY([Produit]) REFERENCES [dbo].[Produit] ([Id])
-ALTER TABLE [dbo].[LigneCommande] CHECK CONSTRAINT [FK_LigneCommande_Produit]
+--ALTER TABLE [dbo].[LigneCommande] CHECK CONSTRAINT [FK_LigneCommande_Produit]
 GO
 
+-- commande 1 : 3 crayons (2.50 l'unité) et 2 stabilo (3.80 l'unité)
+-- commande 2 : 2 cahiers (2.15 l'unité) et 1 agrapheuse (10.60 l'unité)
 
+insert Produit (Libelle, Prix) values
+  ('Crayon', 2.5),
+  ('Stabilo', 3.8),
+  ('Cahier', 2.15),
+  ('Agrapheuse', 10.60)
+insert Commande (NoCommande, DateCommande) values
+  ('A1', GETDATE()),
+  ('A2', GETDATE())
+insert LigneCommande (Commande, Produit, Quantite, PrixUnitaire) values 
+  (1, 1, 3, 2.5),
+  (1, 2, 2, 3.80),
+  (2, 3, 2, 2.15),
+  (2, 4, 1, 10.60)
+
+select SUM(Quantite * PrixUnitaire) Total from LigneCommande
