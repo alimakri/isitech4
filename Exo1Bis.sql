@@ -85,11 +85,11 @@ DECLARE @C2 uniqueidentifier = NEWID()
 insert Commande (Id, NoCommande, DateCommande) values (@C1, 'A1', GETDATE())
 insert Commande (Id, NoCommande, DateCommande) values (@C2, 'A2', GETDATE())
 
-insert LigneCommande (Commande, Produit, Quantite, PrixUnitaire) values 
-  (@C1, @produit1, 3, 2.5),
-  (@C1, @produit2, 2, 3.80),
-  (@C2, @produit3, 2, 2.15),
-  (@C2, @produit4, 1, 10.60)
+insert LigneCommande (Id, Commande, Produit, Quantite, PrixUnitaire) values 
+  (NEWID(), @C1, @produit1, 3, 2.5),
+  (NEWID(), @C1, @produit2, 2, 3.80),
+  (NEWID(), @C2, @produit3, 2, 2.15),
+  (NEWID(), @C2, @produit4, 1, 10.60)
 
 select * from LigneCommande
 select SUM(Quantite * PrixUnitaire) Total from LigneCommande
