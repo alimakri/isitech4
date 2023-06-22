@@ -1,0 +1,24 @@
+USE [master]
+GO
+CREATE LOGIN [PIONE\Test1] FROM WINDOWS WITH DEFAULT_DATABASE=[AdventureWorks2017]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [PIONE\Test1]
+GO
+use [master];
+GO
+USE [AdventureWorks2017]
+GO
+CREATE USER [PIONE\Test1] FOR LOGIN [PIONE\Test1]
+GO
+USE [AdventureWorks2017]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [PIONE\Test1]
+GO
+use [AdventureWorks2017];
+GO
+USE VenteBD
+GO
+CREATE USER [PIONE\Test1] FOR LOGIN [PIONE\Test1]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [PIONE\Test1]
+GO

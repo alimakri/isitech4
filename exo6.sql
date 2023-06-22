@@ -14,6 +14,6 @@ AS
   update Produit set Categorie= @idCat where id=@idProduit
 GO
 
-Exec AjouterProduitCategorie 'Cable USBc', 'Informatique'
+Exec AjouterProduitCategorie 'P_1212', 'Informatique'
 select * from Produit
 select * from Categorie

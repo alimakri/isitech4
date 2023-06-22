@@ -1,0 +1,26 @@
+USE [master]
+GO
+CREATE LOGIN [Henri] WITH PASSWORD=N'P@ssw0rd' MUST_CHANGE, DEFAULT_DATABASE=[AdventureWorks2017], CHECK_EXPIRATION=ON, CHECK_POLICY=ON
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [Henri]
+GO
+use [BD1];
+GO
+USE [AdventureWorks2017]
+GO
+CREATE USER [Henri] FOR LOGIN [Henri]
+GO
+USE [AdventureWorks2017]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [Henri]
+GO
+use [AdventureWorks2017];
+GO
+USE [BD1]
+GO
+CREATE USER [Henri] FOR LOGIN [Henri]
+GO
+USE [BD1]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [Henri]
+GO
