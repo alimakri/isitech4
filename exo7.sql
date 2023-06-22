@@ -1,0 +1,2 @@
+-- Exo 7
+-- Avec Proc et XML ajouter des produits dans la table Produit
